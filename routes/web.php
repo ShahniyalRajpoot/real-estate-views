@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterFormController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +16,16 @@ use App\Http\Controllers\RegisterFormController;
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('login-route');
 
-Route::get('/registeration', function () {
+Route::get('/registration', function () {
     return view('register');
-});
+})->name('register-route');
+
+
 
 Route::post('/submit-registration', [RegisterFormController::class,'registration'])->name('submit-registration');
+Route::post('/submit-login', [LoginController::class,'login'])->name('submit-login');
+
+Route::get('/home', [LoginController::class,'home'])->name('go-home');
+

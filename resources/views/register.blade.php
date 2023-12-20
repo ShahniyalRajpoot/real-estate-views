@@ -11,6 +11,7 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{url('/assets/register/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('/assets/login/vendor/bootstrap/css/bootstrap.min.css')}}">
 </head>
 <body>
 
@@ -21,6 +22,11 @@
         <div class="container">
             <div class="signup-content">
                 <div class="signup-form">
+                    @if(session()->has('msg'))
+                        <div class="alert alert-{{session()->pull('type')}}" role="alert">
+                            {{session()->pull('msg')}}
+                        </div>
+                    @endif
                     <h2 class="form-title">Sign up</h2>
                     <form method="POST" class="register-form" id="register_form" action="{{route('submit-registration')}}">
                         @csrf
@@ -39,7 +45,7 @@
                         <div class="form-group">
                             <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                             <input type="password" name="password_confirmation" id="re_pass" placeholder="Repeat your password"/>
-{{--                            <input type="hidden" name="role" id="role" value="agent"/>--}}
+                            <input type="hidden" name="role" id="role" value="agent"/>
                         </div>
 
                         <div class="form-group form-button">
@@ -49,7 +55,7 @@
                 </div>
                 <div class="signup-image">
                     <figure><img src="{{url('/assets/register/images/signup-image.jpg')}}" alt="sing up image"></figure>
-                    <a href="#" class="signup-image-link">I am already member</a>
+                    <a href="{{route('login-route')}}" class="signup-image-link">I am already member</a>
                 </div>
             </div>
         </div>
