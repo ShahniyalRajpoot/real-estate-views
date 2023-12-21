@@ -16,24 +16,29 @@
         <i class="fas fa-user-cog"></i>
       </div>
       <div class="users">
-        <div class="card">
-          <img src="./pic/img1.jpg">
-          <h4>1 kanal House</h4>
-          <p>Udasdasdasdasdi sdasdasdasdesignerdasdasdasdasda</p>
+
+          @foreach($data['listingInfo']['listing'] as $lists)
+              @if($lists['is_featured']==1)
+                  <div class="card">
+            <a href="{{route('featured-checkss',['id' => $lists['id']])}}" class="feature-star">
+                <i class="fas fa-star featuredIcon "></i>
+            </a>
+          <img src="{{url($lists['single_image']['path'])}}">
+          <h4>{{$lists['title']}}</h4>
+          <p>{{Illuminate\Support\Str::words($lists['description'], 20, '...') }}</p>
           <div class="per">
             <table>
-{{--              <tr>--}}
-                {{--                <td><span>$3500</span></td>--}}
-                {{--                <td><span>3</span></td>--}}
-                {{--              </tr>--}}
-                {{--              <tr>--}}
-                {{--                <td>Price</td>--}}
-                {{--                <td>rooms</td>--}}
-                {{--              </tr>--}}
+              <tr>
+                <td><a href="#" class="EditBtn btn btn-warning"><span>Edit <i class="fas fa-edit "></i></span></a></td>
+                <td><a href="#" class="DeleteBtn btn btn-danger"><span>Delete <i class="fas fa-trash "></i></span></a></td>
+              </tr>
             </table>
           </div>
             <a href="{{route('listing-d')}}" ><button> View Details </button></a>
         </div>
+              @endif
+
+          @endforeach
 
       </div>
     </section>

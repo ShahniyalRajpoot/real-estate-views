@@ -30,12 +30,13 @@
 <body>
 
 <div class="limiter">
+    @if(session()->has('msg'))
+        <div class="alert alert-{{session()->pull('type')}}" role="alert">
+            {{session()->pull('msg')}}
+        </div>
+    @endif
     <div class="container-login100" style="background-image: url({{url('/assets/login/images/bg-01.jpg')}});">
-        @if(session()->has('msg'))
-            <div class="alert alert-{{session()->pull('type')}}" role="alert">
-                {{session()->pull('msg')}}
-            </div>
-        @endif
+
         <div class="wrap-login100">
             <form class="login100-form validate-form" method="post" action="{{route('submit-login')}}">
                 @csrf

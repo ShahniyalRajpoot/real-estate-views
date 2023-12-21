@@ -27,10 +27,16 @@ Route::post('/submit-login', [LoginController::class,'login'])->name('submit-log
 
 
 Route::middleware('verify_api_csrf')->group(function (){
-    Route::get('/welcome-dashboard', [LoginController::class,'home'])->name('dashboard-w');
-    Route::get('/listing', [LoginController::class,'listingDetail'])->name('listing-d');
-    Route::get('/feature-listing', [LoginController::class,'featureListing'])->name('listing-f');
     Route::get('/logout', [LoginController::class,'logout'])->name('logout');
+
+    Route::get('/welcome-dashboard', [LoginController::class,'home'])->name('dashboard-w');
+    Route::get('/listing/{id}', [LoginController::class,'listingDetail'])->name('listing-d');
+    Route::get('/feature-listing', [LoginController::class,'featureListing'])->name('listing-f');
+    Route::get('/profile-setting', [LoginController::class,'profileSetting'])->name('p-setting');
+    Route::post('/save-profile-setting', [LoginController::class,'SaveProfileSettings'])->name('save-p-setting');
+    Route::get('/featured-check/{id}', [LoginController::class,'doFeatured'])->name('featured-checkss');
+    Route::get('/create-listing', [LoginController::class,'createListView'])->name('create-listing');
+
 });
 
 

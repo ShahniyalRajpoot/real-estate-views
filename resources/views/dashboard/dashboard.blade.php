@@ -1,11 +1,13 @@
 <span style="font-family: verdana, geneva, sans-serif;"><!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8" />
   <title>Listing Dashboard</title>
   <link rel="stylesheet" href="{{url('/assets/dashboard/css/style.css')}}" />
     <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
 </head>
 <body>
   <div class="container">
@@ -16,13 +18,14 @@
         <i class="fas fa-user-cog"></i>
       </div>
       <div class="users">
-        <div class="card">
-            <a href="#" class="feature-star">
-                <i class="fas fa-star "></i>
+          @foreach($data['listingInfo']['listing'] as $lists)
+              <div class="card">
+            <a href="{{route('featured-checkss',['id' => $lists['id']])}}" class="feature-star">
+                <i class="fas fa-star @if($lists['is_featured']==1)featuredIcon @endif"></i>
             </a>
-          <img src="./pic/img1.jpg">
-          <h4>1 kanal House</h4>
-          <p>Udasdasdasdasdi sdasdasdasdesignerdasdasdasdasda</p>
+          <img src="{{url($lists['single_image']['path'])}}">
+          <h4>{{$lists['title']}}</h4>
+          <p>{{Illuminate\Support\Str::words($lists['description'], 20, '...') }}</p>
           <div class="per">
             <table>
               <tr>
@@ -32,8 +35,9 @@
 
             </table>
           </div>
-            <a href="{{route('listing-d')}}" ><button> View Details </button></a>
+            <a href="{{route('listing-d',['id'=> $lists['id']])}}" ><button> View Details </button></a>
         </div>
+          @endforeach
 
       </div>
 {{--      <section class="attendance">--}}
