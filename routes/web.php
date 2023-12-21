@@ -22,10 +22,15 @@ Route::get('/registration', function () {
     return view('register');
 })->name('register-route');
 
-
-
 Route::post('/submit-registration', [RegisterFormController::class,'registration'])->name('submit-registration');
 Route::post('/submit-login', [LoginController::class,'login'])->name('submit-login');
 
-Route::get('/home', [LoginController::class,'home'])->name('go-home');
+
+Route::middleware('verify_api_csrf')->group(function (){
+    Route::get('/welcome-dashboard', [LoginController::class,'home'])->name('dashboard-w');
+    Route::get('/listing', [LoginController::class,'listingDetail'])->name('listing-d');
+    Route::get('/feature-listing', [LoginController::class,'featureListing'])->name('listing-f');
+    Route::get('/logout', [LoginController::class,'logout'])->name('logout');
+});
+
 

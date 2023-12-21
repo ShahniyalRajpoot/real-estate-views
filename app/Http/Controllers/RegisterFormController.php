@@ -9,8 +9,9 @@ use GuzzleHttp\Client;
 class RegisterFormController extends Controller
 {
     public function registration(Request $request){
+        $ApiDefaulURl = getGlobalConfig('api_url');
         $inputData = $request->all();
-        $response  = Http::post('http://127.0.0.1:8000/api/register',$inputData);
+        $response  = Http::post($ApiDefaulURl.'/api/register',$inputData);
 //        dd($response->json());
         $data = $response->json();
         if($data['success'] == false && $data['status'] == 201 ){
